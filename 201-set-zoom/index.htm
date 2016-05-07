@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Programatically Set Zoom Level of Map</title>
+        <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+    </head>
+    <body>
+        <h1>Programatically Set Zoom Level of Map</h1>
+        
+        <p>
+            <button onclick="zoomIn()">Zoom In</button>
+            <button onclick="zoomOut()">Zoom Out</button>
+        </p>
+        
+        <div id='myMap' style='width: 600px; height: 400px;'></div>
+        <script type='text/javascript'>
+            var map = null;
+        
+            function loadMap() {
+                map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+                    credentials: 'AmwmVG1f9XSu7cUUR-kVsTBbLfgE4t5SXLFGxG31TKR1Rwulo7xB5V0sq_DFAEl3'
+                });
+            }
+            
+            function zoomIn() {
+                console.debug('Old Zoom: ' + map.getZoom());
+            
+                var newZoom = map.getZoom() + 1;
+                
+                map.setOptions({
+                    zoom: newZoom
+                });
+                
+                console.debug('New Zoom: ' + newZoom);
+            }
+            
+            function zoomOut() {
+                console.debug('Old Zoom: ' + map.getZoom());
+                
+                var newZoom = map.getZoom() - 1;
+                
+                map.setOptions({
+                    zoom: newZoom
+                });
+                
+                console.debug('New Zoom: ' + newZoom);
+            }
+        </script>
+        
+        <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=loadMap' async defer></script>
+    </body>
+</html>
