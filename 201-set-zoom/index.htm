@@ -23,27 +23,19 @@
             }
             
             function zoomIn() {
-                console.debug('Old Zoom: ' + map.getZoom());
-            
                 var newZoom = map.getZoom() + 1;
                 
-                map.setOptions({
+                map.setView({
                     zoom: newZoom
                 });
-                
-                console.debug('New Zoom: ' + newZoom);
             }
             
             function zoomOut() {
-                console.debug('Old Zoom: ' + map.getZoom());
-                
                 var newZoom = map.getZoom() - 1;
                 
-                map.setOptions({
+                map.setView({
                     zoom: newZoom
                 });
-                
-                console.debug('New Zoom: ' + newZoom);
             }
         </script>
         
