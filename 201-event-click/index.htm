@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Handle 'click' Map Event</title>
+        <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+    </head>
+    <body>
+        <h1>Handle 'click' Map Event</h1>
+        
+        <p>Simply clicking the map will trigger the event.</p>
+        <p><strong>Clicked Location:<br/></strong><span id='clickedLocation'></span></p>
+        
+        <div id='myMap' style='width: 600px; height: 400px;'></div>
+        
+        <script type='text/javascript'>
+            function loadMap() {
+                var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+                    credentials: 'Your Bing Maps Key'
+                });
+                
+                // attach event handler
+                Microsoft.Maps.Events.addHandler(map, 'click', clickHandler);
+            }
+            
+            function clickHandler(e) {
+                document.getElementById('clickedLocation').innerHTML = 'Lat: ' + e.location.latitude + '<br/>Long: ' + e.location.longitude;
+            }
+        </script>
+        <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=loadMap' async defer></script>
+        
+        <hr/>
+        <a href="https://github.com/crpietschmann/bingmaps-v8-quickstart-samples/blob/master/201-event-click/index.htm">View Full Source Code</a>
+        &nbsp;|&nbsp;Bing Maps v8 Quickstart Samples project
+    </body>
+</html>
