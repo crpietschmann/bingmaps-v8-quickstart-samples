@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Autosuggest Module</title>
+        <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+        <style>
+            input {
+                padding: 0.5em;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Audtosuggest Module</h1>
+        
+        <span id="suggestContainer">
+            Location: <input type="text" id="suggestBox"/>
+        </span>
+        
+        <div id='myMap' style='width: 600px; height: 400px;'></div>
+        
+        Selected Location: <span id="selectedSuggestion"></span>
+        
+        <script type='text/javascript'>
+            function loadMap() {
+                var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+                    credentials: 'Your Bing Maps Key',
+                    zoom: 10
+                });
+                
+                Microsoft.Maps.loadModule('Microsoft.Maps.AutoSuggest', function() {
+                    var suggestOptions = {
+                        map: map,
+                        maxResults: 5
+                    };
+                    var autoSuggestManager = new Microsoft.Maps.AutosuggestManager(suggestOptions);
+                    autoSuggestManager.attachAutosuggest('#suggestBox', '#suggestContainer', suggestionSelected);
+                });
+                
+                function suggestionSelected(result) {
+                    // add pushpin to map for selected location
+                    map.entities.clear();
+                    var pushpin = new Microsoft.Maps.Pushpin(result.location);
+                    map.entities.push(pushpin);
+                    
+                    // navigate the map to the selected location
+                    map.setView({
+                        center: result.location,
+                        zoom: 10
+                    });
+                    
+                    // display the selected suggestion
+                    document.getElementById('selectedSuggestion').innerHTML = result.formattedSuggestion;   
+                }
+            }
+        </script>
+        <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=loadMap' async defer></script>
+    </body>
+</html>

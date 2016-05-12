@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Create a Basic Polygon</title>
+        <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+    </head>
+    <body>
+        <h1>Create a Basic Polygon</h1>
+        
+        <div id='myMap' style='width: 600px; height: 400px;'></div>
+        <script type='text/javascript'>
+            function loadMap() {
+                var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+                    credentials: 'Your Bing Maps Key'
+                });
+                
+                // get center Location of the map
+                // this will be used to base the polyline off of
+                var mapCenter = map.getCenter();
+                
+                // create the polygon, and add
+                // points to it
+                var polyline = new Microsoft.Maps.Polygon([
+                    new Microsoft.Maps.Location(mapCenter.latitude, mapCenter.longitude),
+                    new Microsoft.Maps.Location(mapCenter.latitude + 0.03, mapCenter.longitude),
+                    new Microsoft.Maps.Location(mapCenter.latitude + 0.03, mapCenter.longitude + 0.03),
+                    new Microsoft.Maps.Location(mapCenter.latitude, mapCenter.longitude + 0.03)
+                ]);
+                
+                // add polygon to the map
+                map.entities.push(polyline);
+            }
+        </script>
+        <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=loadMap' async defer></script>
+    </body>
+</html>

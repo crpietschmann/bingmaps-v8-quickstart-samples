@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Create a Full Page Map</title>
+        <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+        <style>
+            #myMap {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <div id='myMap'></div>
+        <script type='text/javascript'>
+            function loadMap() {
+                var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+                    credentials: 'Your Bing Maps Key'
+                });
+            }
+        </script>
+        <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=loadMap' async defer></script>
+    </body>
+</html>
