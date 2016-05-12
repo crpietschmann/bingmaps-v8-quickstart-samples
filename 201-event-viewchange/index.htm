@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Handle 'viewchange' Map Event</title>
+        <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+    </head>
+    <body>
+        <h1>Handle 'viewchange' Map Event</h1>
+        
+        <p>Simply scrolling, zooming, or moving the map will trigger the event.</p>
+        <p><strong>Status: </strong><span id='viewChangedStatus'></span></p>
+        
+        <div id='myMap' style='width: 600px; height: 400px;'></div>
+        
+        <script type='text/javascript'>
+            function loadMap() {
+                var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+                    credentials: 'Your Bing Maps Key'
+                });
+                
+                // attach 'viewchange' event handler
+                Microsoft.Maps.Events.addHandler(map, 'viewchange', viewChangeHandler);
+            }
+            
+            function viewChangeHandler() {
+                document.getElementById('viewChangedStatus').innerHTML = 'View Changing (' + new Date() + ')...';
+            }
+        </script>
+        <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=loadMap' async defer></script>
+        
+        <hr/>
+        <a href="https://github.com/crpietschmann/bingmaps-v8-quickstart-samples/blob/master/201-event-viewchange/index.htm">View Full Source Code</a>
+        &nbsp;|&nbsp;Bing Maps v8 Quickstart Samples project
+    </body>
+</html>
