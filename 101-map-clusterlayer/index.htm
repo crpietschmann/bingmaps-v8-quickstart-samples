@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Basic Pushpin Clustering</title>
+        <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+    </head>
+    <body>
+        <h1>Basic Pushpin Clustering</h1>
+        
+        <div id='myMap' style='width: 600px; height: 400px;'></div>
+        <script type='text/javascript'>
+            function loadMap() {
+                var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+                    credentials: 'Your Bing Maps Key'
+                });
+                
+                // load Clustering module
+                Microsoft.Maps.loadModule('Microsoft.Maps.Clustering', function () {
+                    // auto-generate some random Pushpins to place on the map
+                    var pushpins = Microsoft.Maps.TestDataGenerator.getPushpins(1000, map.getBounds());
+                    
+                    // create a new ClusterLayer and add the Pushpins to it
+                    var layer = new Microsoft.Maps.ClusterLayer(pushpins);
+                    
+                    // add the layer to the map
+                    map.layers.insert(layer);
+                });
+            }
+        </script>
+        <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=loadMap' async defer></script>
+        
+        <hr/>
+        <a href="https://github.com/crpietschmann/bingmaps-v8-quickstart-samples/blob/master/101-map-clusterlayer/index.htm">View Full Source Code</a>
+        &nbsp;|&nbsp;Bing Maps v8 Quickstart Samples project
+        <br/><br/>
+        <em>Attribution: This sample is based off of the <a href="http://blogs.bing.com/maps/May-2016-(1)/Pushpin-Clustering-in-Bing-Maps-V8">Pushpin Clustering in Bing Maps V8</a> blog post by Ricky Brundritt on the Bing Maps blog.</em>
+    </body>
+</html>
