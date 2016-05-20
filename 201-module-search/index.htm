@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Search Module</title>
+        <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+    </head>
+    <body>
+        <h1>Search Module</h1>
+        
+        <div id='myMap' style='width: 600px; height: 400px;'></div>
+        <script type='text/javascript'>
+            function loadMap() {
+                var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+                    // Do NOT use these credentials, replace with your own Bing Maps Key
+                    credentials: 'AqZIJ16MwrmX1j6ralUaT_dszdom3AFB7vvZsoKqnofbhT44C-wCDydebkFJrvwg'
+                });
+                
+                // load the Search module
+                Microsoft.Maps.loadModule('Microsoft.Maps.Search', function() {
+
+                    // create SearchManager to do search
+                    var manager = new Microsoft.Maps.Search.SearchManager(map);
+                    
+                    // create request options for search
+                    var options = new Microsoft.Maps.Search.GeocodeRequestOptions();
+                    
+                    // set an Address to search for
+                    options.where = '1 Infinite Loop, Palo Alto, CA';
+                    
+                    options.callback = function (answer, data) {
+                        // set the best view to show the first search result
+                        map.setView({
+                            bounds: answer.results[0].bestView
+                        });
+                        
+                        // create pushpin for first search result
+                        var pin = new Microsoft.Maps.Pushpin(answer.results[0].location);
+                        
+                        // plot the pushpin on the map
+                        map.entities.push(pin);
+                    };
+                    
+                    // Call geocode to perform the search
+                    manager.geocode(options);
+                });
+            }
+        </script>
+        <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=loadMap' async defer></script>
+        
+        <hr/>
+        <a href="https://github.com/crpietschmann/bingmaps-v8-quickstart-samples/blob/master/201-module-search/index.htm">View Full Source Code</a>
+        &nbsp;|&nbsp;Bing Maps v8 Quickstart Samples project
+    </body>
+</html>
