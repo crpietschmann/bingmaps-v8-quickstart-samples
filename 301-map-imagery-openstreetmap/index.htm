@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>OpenStreetMap Imagery Tile Layer</title>
+        <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+    </head>
+    <body>
+        <h1>OpenStreetMap Imagery Tile Layer</h1>
+        
+        <div id='myMap' style='width: 600px; height: 400px;'></div>
+        <script type='text/javascript'>
+            function loadMap() {
+                var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+                    credentials: 'Your Bing Maps Key'
+                });
+
+                // Create a TileSource that generates the URLs to load OpenStreetMap imagery                
+                var tileSource = new Microsoft.Maps.TileSource({
+                    uriConstructor: function(options) {
+                        return 'http://tile.openstreetmap.org/' + options.zoom + '/' + options.x + '/' + options.y + '.png';
+                    }
+                });
+                
+                // Create a TileLayer to display the OpenStreetMap TileSource
+                var tileLayer = new Microsoft.Maps.TileLayer({
+                    mercator: tileSource
+                });
+                
+                
+                // Add the OpenStreetMap Imagery TileLayer to the Map
+                map.layers.insert(tileLayer);
+            }
+        </script>
+        <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=loadMap' async defer></script>
+        
+        <hr/>
+        <a href="https://github.com/crpietschmann/bingmaps-v8-quickstart-samples/blob/master/301-map-imagery-openstreetmap/index.htm">View Full Source Code</a>
+        &nbsp;|&nbsp;Bing Maps v8 Quickstart Samples project
+    </body>
+</html>
