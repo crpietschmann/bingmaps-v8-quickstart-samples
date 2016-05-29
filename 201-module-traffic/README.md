@@ -1,7 +1,7 @@
-# Create a Basic Map Asynchronously
+# Load Traffic Module
 
-This sample shows how to create a basic map using the Bing Maps v8 JavaScript control on a page. This sample shows the map creationg being performed using the Asyncrhonous method.
+This is a basic sample that loads the Traffic Module and display a traffic layer over the Bing Maps v8 Javascript control.
 
-[See it Run](http://crpietschmann.github.io/bingmaps-v8-quickstart-samples/101-map-async/)
+[See it Run](http://crpietschmann.github.io/bingmaps-v8-quickstart-samples/201-module-traffic/)
 
 [View Code](index.htm)
