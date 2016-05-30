@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Spacial Math Module - Convert Distance</title>
+        <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+    </head>
+    <body>
+        <h1>Spacial Math Module - Convert Distance</h1>
+        
+        <p>
+            1000 kilometers = <span id='spanMiles'></span> miles
+        </p>
+        
+        <script type='text/javascript'>
+            function loadMap() {
+                
+                Microsoft.Maps.loadModule('Microsoft.Maps.SpatialMath', function () {
+                    var kilometers = 1000;
+
+                    var miles = Microsoft.Maps.SpatialMath.convertDistance(
+                        kilometers,
+                        Microsoft.Maps.SpatialMath.DistanceUnits.Kilometers,
+                        Microsoft.Maps.SpatialMath.DistanceUnits.Miles
+                    );
+                    
+                    document.getElementById('spanMiles').innerHTML = miles;
+                });
+
+            }
+        </script>
+        <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=loadMap' async defer></script>
+        
+        <hr/>
+        <a href="https://github.com/crpietschmann/bingmaps-v8-quickstart-samples/blob/master/201-module-spacialmath-convertdistance/index.htm">View Full Source Code</a>
+        &nbsp;|&nbsp;Bing Maps v8 Quickstart Samples project
+    </body>
+</html>
