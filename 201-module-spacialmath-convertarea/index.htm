@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Spacial Math Module - Convert Area</title>
+        <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+    </head>
+    <body>
+        <h1>Spacial Math Module - Convert Area</h1>
+        
+        <p>
+            1000 Acres = <span id='spanMiles'></span> sq. miles
+        </p>
+        
+        <script type='text/javascript'>
+            function loadMap() {
+                
+                Microsoft.Maps.loadModule('Microsoft.Maps.SpatialMath', function () {
+                    var kilometers = 1000;
+
+                    var miles = Microsoft.Maps.SpatialMath.convertArea(
+                        kilometers,
+                        Microsoft.Maps.SpatialMath.AreaUnits.Acres,
+                        Microsoft.Maps.SpatialMath.AreaUnits.SquareMiles
+                    );
+                    
+                    document.getElementById('spanMiles').innerHTML = miles;
+                });
+
+            }
+        </script>
+        <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=loadMap' async defer></script>
+        
+        <hr/>
+        <a href="https://github.com/crpietschmann/bingmaps-v8-quickstart-samples/blob/master/201-module-spacialmath-convertarea/index.htm">View Full Source Code</a>
+        &nbsp;|&nbsp;Bing Maps v8 Quickstart Samples project
+    </body>
+</html>
