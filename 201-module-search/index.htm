@@ -6,6 +6,10 @@
     </head>
     <body>
         <h1>Search Module</h1>
+
+        <input type="text" id="txtSearch" value="1 Infinite Loop, Palo Alto, CA"/> <button type="button" id="btnSearch">Search</button><br/>
+        <strong>Latitude: </strong><span id="txtLat"></span><br/>
+        <strong>Longitude: </strong><span id="txtLng"></span>
         
         <div id='myMap' style='width: 600px; height: 400px;'></div>
         <script type='text/javascript'>
@@ -15,36 +19,58 @@
                     credentials: 'AqZIJ16MwrmX1j6ralUaT_dszdom3AFB7vvZsoKqnofbhT44C-wCDydebkFJrvwg'
                 });
                 
-                // load the Search module
-                Microsoft.Maps.loadModule('Microsoft.Maps.Search', function() {
 
-                    // create SearchManager to do search
-                    var manager = new Microsoft.Maps.Search.SearchManager(map);
+                function doSearch() {
+                    var searchQuery = $('#txtSearch').val();
                     
-                    // create request options for search
-                    var options = new Microsoft.Maps.Search.GeocodeRequestOptions();
+                    // load the Search module
+                    Microsoft.Maps.loadModule('Microsoft.Maps.Search', function() {
                     
-                    // set an Address to search for
-                    options.where = '1 Infinite Loop, Palo Alto, CA';
-                    
-                    options.callback = function (answer, data) {
-                        // set the best view to show the first search result
-                        map.setView({
-                            bounds: answer.results[0].bestView
-                        });
+                        // create SearchManager to do search
+                        var manager = new Microsoft.Maps.Search.SearchManager(map);
                         
-                        // create pushpin for first search result
-                        var pin = new Microsoft.Maps.Pushpin(answer.results[0].location);
+                        // create request options for search
+                        var options = new Microsoft.Maps.Search.GeocodeRequestOptions();
                         
-                        // plot the pushpin on the map
-                        map.entities.push(pin);
-                    };
-                    
-                    // Call geocode to perform the search
-                    manager.geocode(options);
+                        // set an Address to search for
+                        options.where = searchQuery;
+                        
+                        options.callback = function (answer, data) {
+                            // set the best view to show the first search result
+                            map.setView({
+                                bounds: answer.results[0].bestView
+                            });
+                            
+                            // create pushpin for first search result
+                            var pin = new Microsoft.Maps.Pushpin(answer.results[0].location);
+
+                            $('#txtLat').text(answer.results[0].location.latitude);
+                            $('#txtLng').text(answer.results[0].location.longitude);                        
+
+
+                            // plot the pushpin on the map
+                            map.entities.push(pin);
+                        };
+                        
+                        // Call geocode to perform the search
+                        manager.geocode(options);
+                    });
+                }
+
+
+                $('#btnSearch').click(function(){
+                    doSearch();
                 });
+                $('#txtSearch').keypress(function(e) {
+                    if(e.which == 13) {
+                        doSearch();
+                    }
+                });
+
+                doSearch();
             }
         </script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=loadMap' async defer></script>
         
         <hr/>
